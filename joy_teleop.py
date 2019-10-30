@@ -3,15 +3,15 @@ import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Imu, Joy
 
-vx = 0
-vy = 0
+vl = 0
+vr = 0
 
 def joy_callback(data):
-    global vx, vy
-    vx = data.axes[3]
-    vy = data.axes[4]
-    rospy.loginfo("x: %s", vx)
-    rospy.loginfo("y: %s", vy)
+    global vl, vr
+    vl = data.axes[1]
+    vr = data.axes[4]
+    rospy.loginfo("Left: %s", vl)
+    rospy.loginfo("Right: %s", vr)
 
 def imu_callback(data):
     pass
@@ -25,8 +25,8 @@ def main():
     rate = rospy.Rate(10)
     vel = Twist()
     while not rospy.is_shutdown():
-        vel.linear.x = vy
-        vel.angular.z = (vx if vy >=0 else -vx)
+        vel.linear.x = vl
+        vel.linear.y = vr
         vel_pub.publish(vel)
         rate.sleep()
 
