@@ -1,0 +1,8 @@
+<launch>
+	<node pkg="joy" type="joy_node" name="joy">
+	</node>
+	<node pkg="joycontrol" type="joy_teleop.py" name="joycontrol">
+	</node>
+	<node pkg="rviz" type="rviz" name="rviz">
+	</node>
+</launch>
